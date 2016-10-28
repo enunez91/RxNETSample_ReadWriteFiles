@@ -38,13 +38,14 @@ namespace RxNETSample_ReadWriteFiles
                     for (int i = 0; i < lines.Length; i++)
                     {
                         dataGridFile.Rows.Add(lines[i]);
-                        Thread.Sleep(1000);
+                        Thread.Sleep(2000); 
                     }
                 }
             });
 
             read = Observable.FromEventPattern<EventArgs>(btnReadFile, "Click");
             read.Subscribe(ob);
+            ob.OnCompleted();
         }
     }
 }
