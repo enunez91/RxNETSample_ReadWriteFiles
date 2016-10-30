@@ -32,7 +32,7 @@ namespace RxNETSample_ReadWriteFiles
             var scheduler = new NewThreadScheduler(t => new Thread(t) { Name = "Thread1" });
             var gridSch = new ControlScheduler(dataGridFile);
             
-            var ob = Observer.Create<EventPattern<object>>(o => 
+            var obRead = Observer.Create<EventPattern<object>>(o => 
             {
                 //wait a moment
                 //non blocking
@@ -50,11 +50,23 @@ namespace RxNETSample_ReadWriteFiles
                 }                
             });
 
+            var obWrite = Observer.Create<EventPattern<object>>(o =>
+            {
+                Thread.Sleep(5000);
+                appendLinesToFile();                
+            });
+
             Observable.FromEventPattern(
                 h => this.btnReadFile.Click += h,
                 h => this.btnReadFile.Click -= h)
                 .ObserveOn(scheduler)
-                .Subscribe(ob, cancel.Token);
+                .Subscribe(obRead, cancel.Token);
+
+            Observable.FromEventPattern(
+                h => this.btnWriteFile.Click += h,
+                h => this.btnWriteFile.Click -= h)
+                .ObserveOn(scheduler)
+                .Subscribe(obWrite, cancel.Token);
 
             Observable.FromEventPattern(
                 h => Application.ApplicationExit += h,
@@ -79,5 +91,23 @@ namespace RxNETSample_ReadWriteFiles
         {
             dataGridFile.Rows.Add(line);            
         }
+
+        private void appendLinesToFile()
+        {
+            StringBuilder sb = new StringBuilder();
+
+            foreach (DataGridViewRow row in dataGridFile.Rows)
+            {
+                if(row.Cells[0].Value != null)
+                    sb.AppendLine(row.Cells[0].Value.ToString());                                
+            }
+
+            using (StreamWriter sw = File.AppendText(txtFileToWrite.Text))
+            {
+                sw.Write(sb.ToString());
+                sb.Clear();
+            }
+        }
+
     }
 }

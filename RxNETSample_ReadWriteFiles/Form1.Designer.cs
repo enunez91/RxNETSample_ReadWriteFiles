@@ -33,6 +33,8 @@
             this.btnReadFile = new System.Windows.Forms.Button();
             this.txtFileToRead = new System.Windows.Forms.TextBox();
             this.fileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.txtFileToWrite = new System.Windows.Forms.TextBox();
+            this.btnWriteFile = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridFile)).BeginInit();
             this.SuspendLayout();
             // 
@@ -67,17 +69,36 @@
             this.txtFileToRead.Name = "txtFileToRead";
             this.txtFileToRead.Size = new System.Drawing.Size(331, 20);
             this.txtFileToRead.TabIndex = 2;
-            this.txtFileToRead.Text = "c:\\temp\\test.txt";
+            this.txtFileToRead.Text = "c:\\temp\\in.txt";
             // 
             // fileDialog
             // 
             this.fileDialog.FileName = "Open";
             // 
+            // txtFileToWrite
+            // 
+            this.txtFileToWrite.Location = new System.Drawing.Point(12, 220);
+            this.txtFileToWrite.Name = "txtFileToWrite";
+            this.txtFileToWrite.Size = new System.Drawing.Size(331, 20);
+            this.txtFileToWrite.TabIndex = 3;
+            this.txtFileToWrite.Text = "c:\\temp\\out.txt";
+            // 
+            // btnWriteFile
+            // 
+            this.btnWriteFile.Location = new System.Drawing.Point(350, 216);
+            this.btnWriteFile.Name = "btnWriteFile";
+            this.btnWriteFile.Size = new System.Drawing.Size(75, 23);
+            this.btnWriteFile.TabIndex = 4;
+            this.btnWriteFile.Text = "Write";
+            this.btnWriteFile.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(436, 211);
+            this.ClientSize = new System.Drawing.Size(436, 266);
+            this.Controls.Add(this.btnWriteFile);
+            this.Controls.Add(this.txtFileToWrite);
             this.Controls.Add(this.txtFileToRead);
             this.Controls.Add(this.btnReadFile);
             this.Controls.Add(this.dataGridFile);
@@ -96,6 +117,8 @@
         private System.Windows.Forms.TextBox txtFileToRead;
         private System.Windows.Forms.DataGridViewTextBoxColumn Line;
         private System.Windows.Forms.OpenFileDialog fileDialog;
+        private System.Windows.Forms.TextBox txtFileToWrite;
+        private System.Windows.Forms.Button btnWriteFile;
     }
 }
 
