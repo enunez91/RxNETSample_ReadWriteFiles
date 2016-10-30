@@ -34,7 +34,7 @@ namespace RxNETSample_ReadWriteFiles
             
             var ob = Observer.Create<EventPattern<object>>(o => 
             {
-                //wait a moment.
+                //wait a moment
                 //non blocking
                 Thread.Sleep(5000);
 
